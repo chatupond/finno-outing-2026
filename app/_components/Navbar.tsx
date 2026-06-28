@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useTransition } from "react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useSession, signOut, signIn } from "next-auth/react"
 import Image from "next/image"
@@ -48,7 +47,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="#home" className="flex items-center">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center">
           <Image
             src="/images/logo.png"
             alt="Finnomena Tech Outing 2026"
@@ -56,7 +55,7 @@ export default function Navbar() {
             height={612}
             className="h-10 w-auto"
           />
-        </Link>
+        </button>
 
         {/* CTA */}
         <div className="flex items-center gap-3">

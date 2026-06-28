@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 import Navbar from "./_components/Navbar"
 import HeroSection from "./_components/HeroSection"
 import AccommodationSection from "./_components/AccommodationSection"
@@ -49,14 +50,13 @@ export default function Home() {
       <BackToTopButton />
       <footer className="bg-secondary-dark py-10 border-t border-white/5" style={{ backgroundColor: "#00101e" }}>
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-secondary text-xs font-black">F</span>
-            </div>
-            <span className="text-white/60 text-sm font-medium">
-              Finnomena<span className="text-primary">Tech</span> Outing 2026
-            </span>
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt="Finnomena Tech Outing 2026"
+            width={750}
+            height={612}
+            className="h-10 w-auto"
+          />
           <p className="text-white/30 text-xs text-center">
             16–17 October 2026 · Heaven Kwai Resort, Kanchanaburi
           </p>

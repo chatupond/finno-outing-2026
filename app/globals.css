@@ -12,6 +12,10 @@ html {
   scroll-behavior: smooth;
 }
 
+button, a {
+  cursor: pointer;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

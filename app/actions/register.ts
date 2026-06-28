@@ -40,7 +40,7 @@ export async function registerAttendee(
   }
 
   if (!isAllowedEmail(email)) {
-    return { error: "Only @finnomena.com email addresses can register." }
+    return { error: "Only @finnomena.com and @fint.finance email addresses can register." }
   }
 
   const alreadyRegistered = await checkExistingRegistration(email)

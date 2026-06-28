@@ -1,4 +1,4 @@
-export const ALLOWED_DOMAINS = ["finnomena.com", "gmail.com"]
+export const ALLOWED_DOMAINS = ["finnomena.com", "fint.finance"]
 
 export function isAllowedEmail(email: string) {
   const lower = email.toLowerCase()

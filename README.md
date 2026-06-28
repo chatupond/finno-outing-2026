@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finnomena Tech Outing 2026
 
-## Getting Started
+Landing page for the Finnomena Tech team outing event — 16–17 October 2026 at Heaven Kwai Resort, Kanchanaburi.
 
-First, run the development server:
+## Tech Stack
+
+- **Next.js 16** (App Router, Server Components)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **NextAuth.js v5** (Auth.js) — Google OAuth
+- **Google Sheets API** — attendee registration & display
+
+## Project Structure
+
+```
+app/
+├── layout.tsx              # Root layout with metadata & SessionProvider
+├── page.tsx                # Main page (assembles all sections)
+├── globals.css             # Tailwind imports & custom theme
+├── favicon.ico
+├── _components/
+│   ├── Navbar.tsx          # Sticky navigation (Client Component)
+│   ├── HeroSection.tsx     # Hero with CTA buttons
+│   ├── AccommodationSection.tsx  # Resort overview
+│   ├── ActivitiesSection.tsx     # Activity gallery
+│   ├── RoomsSection.tsx          # Room image grid
+│   ├── RegistrationSection.tsx   # Google OAuth + team form (Client)
+│   ├── AttendeesSection.tsx      # Live attendee list (Server async)
+│   └── SessionProvider.tsx       # Client wrapper for NextAuth
+├── api/auth/[...nextauth]/
+│   └── route.ts            # NextAuth route handler
+├── actions/
+│   └── register.ts         # Server Action: register attendee
+└── lib/
+    ├── sheets.ts            # Google Sheets read/write
+auth.ts                     # NextAuth configuration
+```
+
+## Setup
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+Copy `.env.example` to `.env.local`:
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in the values:
+
+```env
+# Google OAuth — from Google Cloud Console > APIs & Services > Credentials
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret
+
+# NextAuth secret — generate with: openssl rand -base64 32
+AUTH_SECRET=your_random_secret
+
+# Google Sheets service account (for reading/writing registrations)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+
+# Google Sheet ID (from the sheet URL)
+GOOGLE_SHEET_ID=1M4ILdv340WuB3BnIRXxSpB8jBx-IvFjyGvrTmOJIJR0
+```
+
+### 3. Google Cloud Setup
+
+#### Google OAuth (for user sign-in)
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Create or select a project
+3. Enable the **Google People API**
+4. Go to **APIs & Services > Credentials**
+5. Create an **OAuth 2.0 Client ID** (Web application)
+6. Add authorized redirect URIs:
+   - `http://localhost:3000/api/auth/callback/google` (development)
+   - `https://yourdomain.com/api/auth/callback/google` (production)
+7. Copy **Client ID** and **Client Secret** to `.env.local`
+
+#### Google Sheets (for attendee data)
+
+1. In the same project, enable the **Google Sheets API**
+2. Go to **IAM & Admin > Service Accounts**
+3. Create a new service account
+4. Download the JSON key file
+5. From the JSON, copy:
+   - `client_email` → `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+   - `private_key` → `GOOGLE_PRIVATE_KEY` (keep the `\n` newlines as-is)
+6. Share your Google Sheet with the service account email (Editor access)
+7. Make sure the sheet has a tab named **Attendees**
+
+The Attendees tab columns (auto-populated):
+| A: Timestamp | B: Name | C: Email | D: Team | E: Profile Image URL |
+
+### 4. Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 5. Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Connect your GitHub repository to Vercel and add all environment variables in the Vercel dashboard under **Settings > Environment Variables**.
 
-## Learn More
+For `GOOGLE_PRIVATE_KEY`, paste the full key including `-----BEGIN...-----END-----` with literal `\n` newlines (not actual newlines).
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Section | Description |
+|---------|-------------|
+| **Hero** | Full-screen event intro with CTAs |
+| **Accommodation** | Heaven Kwai Resort overview & images |
+| **Activities** | Water, adventure, outdoor, relaxation & group |
+| **Rooms** | Responsive image gallery |
+| **Registration** | Google sign-in + team selection form |
+| **Attendees** | Live list grouped by team (SSR + revalidation) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Color Design System
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Token | Value | Usage |
+|-------|-------|-------|
+| `primary` | `#f2f93c` | Accent, buttons, highlights |
+| `secondary` | `#01172b` | Dark backgrounds, text |
+| Text (light bg) | `#333333` | Body copy on white sections |
+| Text (dark bg) | `#ffffff` | Text on dark sections |

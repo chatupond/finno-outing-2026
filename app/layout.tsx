@@ -10,22 +10,28 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  title: "Finnomena Tech Outing 2026",
-  description:
-    "Team outing and team building experience — 16–17 October 2026 at Heaven Kwai Resort, Kanchanaburi",
+  title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+  description: "ทริป Outing ของทีม Finnomena tech",
   openGraph: {
-    title: "Finnomena Tech Outing 2026",
-    description:
-      "Join us for an unforgettable team building experience at Heaven Kwai Resort, Kanchanaburi.",
+    title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+    description: "ทริป Outing ของทีม Finnomena tech",
     type: "website",
-    locale: "en_TH",
+    locale: "th_TH",
     siteName: "Finnomena Tech Outing 2026",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1512,
+        height: 756,
+        alt: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Finnomena Tech Outing 2026",
-    description:
-      "Team outing and team building experience — 16–17 October 2026, Kanchanaburi",
+    title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+    description: "ทริป Outing ของทีม Finnomena tech",
+    images: ["/images/og-image.png"],
   },
   keywords: [
     "Finnomena Tech",

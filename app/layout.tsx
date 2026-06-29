@@ -10,10 +10,10 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+  title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
   description: "ทริป Outing ของทีม Finnomena tech",
   openGraph: {
-    title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+    title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
     description: "ทริป Outing ของทีม Finnomena tech",
     type: "website",
     locale: "th_TH",
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1512,
         height: 756,
-        alt: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+        alt: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Finnomena Tech Outing 2026 - Heaven Kwai Resort",
+    title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
     description: "ทริป Outing ของทีม Finnomena tech",
     images: ["/images/og-image.png"],
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "Finnomena Tech",
     "Team Outing",
     "Kanchanaburi",
-    "Heaven Kwai Resort",
+    "Lake Heaven Resort",
     "Team Building",
     "2026",
   ],

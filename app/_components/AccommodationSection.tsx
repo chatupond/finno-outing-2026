@@ -5,12 +5,10 @@ import Image from "next/image"
 import TypingText from "./TypingText"
 
 const slides = [
-  { src: "/images/heaven-kwai-resort-1.JPG", alt: "Heaven Kwai Resort" },
-  { src: "/images/heaven-kwai-resort-2.JPG", alt: "Heaven Kwai Resort Aerial View" },
-  { src: "/images/resort-5.JPG", alt: "Heaven Kwai Resort Sunset Sign" },
-  { src: "/images/resort-6.JPG", alt: "Heaven Kwai Resort River Villas" },
-  { src: "/images/resort-3.JPG", alt: "Heaven Kwai Resort Misty River Sunrise" },
-  { src: "/images/resort-4.JPG", alt: "Heaven Kwai Resort Rock Viewpoint" },
+  { src: "/images/lake-heaven-resort-4.jpg", alt: "Lake Heaven Resort Floating Villas" },
+  { src: "/images/lake-heaven-resort-2.jpg", alt: "Lake Heaven Resort Aerial Sunset View" },
+  { src: "/images/lake-heaven-resort-1.jpg", alt: "Lake Heaven Resort Water Park Overview" },
+  { src: "/images/lake-heaven-resort-3.jpg", alt: "Lake Heaven Resort Giant Slide" },
 ]
 
 const highlights = [
@@ -39,8 +37,8 @@ const highlights = [
       </svg>
     ),
     label: "Resort",
-    value: "Heaven Kwai Resort",
-    mapUrl: "https://maps.google.com/?q=Heaven+Kwai+Resort+Kanchanaburi+Thailand",
+    value: "Lake Heaven Resort",
+    mapUrl: "https://maps.google.com/?q=Lake+Heaven+Resort+Kanchanaburi+Thailand",
   },
   {
     icon: (
@@ -141,14 +139,14 @@ export default function AccommodationSection() {
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-6">
-            Heaven Kwai Resort
+            Lake Heaven Resort
           </h2>
 
           <p className="text-dark-text/70 leading-relaxed mb-4">
-            <TypingText text="รีสอร์ตริมแม่น้ำแคว ที่รวมความงดงามของธรรมชาติ ความสะดวกสบาย และกิจกรรมสนุกไว้ในที่เดียว — เหมาะสำหรับการพักผ่อน ทำกิจกรรมร่วมกัน และสร้างช่วงเวลาดี ๆ กับทีมอย่างเต็มที่" onDone={() => setFirstDone(true)} />
+            <TypingText text="รีสอร์ตลอยน้ำกลางทะเลสาบ ที่รวมความตื่นเต้นของ Water Park ระดับโลก ห้องพักสไตล์ Floating Villa และบรรยากาศธรรมชาติที่สวยงามไว้ในที่เดียว" onDone={() => setFirstDone(true)} />
           </p>
           <p className="text-dark-text/70 leading-relaxed mb-10">
-            <TypingText text="พบกับที่พักแสนสบาย วิวริมแม่น้ำที่สวยงาม กิจกรรมให้เลือกหลากหลาย และสิ่งอำนวยความสะดวกครบครัน — เพื่อประสบการณ์ Outing ของทีมที่พิเศษกว่าทุกครั้ง" speed={20} enabled={firstDone} />
+            <TypingText text="สัมผัสประสบการณ์นอนลอยน้ำ เล่นสไลเดอร์ยักษ์ ลุยกิจกรรม Aqua Park สุดมันส์ และชมวิวทะเลสาบยามเย็น — ทริป Outing ที่ทีมจะจำไม่ลืม" speed={20} enabled={firstDone} />
           </p>
 
           {/* Highlights */}
@@ -179,7 +177,7 @@ export default function AccommodationSection() {
           {/* CTA buttons */}
           <div className="flex flex-wrap gap-3">
             <a
-              href="https://heavenkwai.com/"
+              href="https://lakeheaven.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-primary font-semibold text-sm px-6 py-3 rounded-xl hover:bg-secondary/80 transition-colors duration-200"
@@ -188,7 +186,7 @@ export default function AccommodationSection() {
               <ExternalIcon />
             </a>
             <a
-              href="https://www.facebook.com/heavenkwai"
+              href="https://www.facebook.com/LakeHeavenResort"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-secondary/30 text-secondary font-semibold text-sm px-6 py-3 rounded-xl hover:bg-secondary/5 transition-colors duration-200"

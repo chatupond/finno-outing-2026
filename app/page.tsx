@@ -58,7 +58,7 @@ export default function Home() {
             className="h-10 w-auto"
           />
           <p className="text-white/30 text-xs text-center">
-            16–17 October 2026 · Heaven Kwai Resort, Kanchanaburi
+            16–17 October 2026 · Lake Heaven Resort, Kanchanaburi
           </p>
           <p className="text-white/20 text-xs">
             See you there! 🎉

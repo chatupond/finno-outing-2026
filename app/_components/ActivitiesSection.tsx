@@ -6,18 +6,22 @@ import Lightbox, { type LightboxImage } from "./Lightbox"
 import TypingText from "./TypingText"
 
 const images: LightboxImage[] = [
-  { src: "/images/activity-1.JPG", alt: "Swimming pool" },
-  { src: "/images/activity-2.JPG", alt: "Pedal boat and kayak" },
-  { src: "/images/activity-3.JPG", alt: "Basket boat" },
-  { src: "/images/activity-4.JPG", alt: "3 meals included" },
-  { src: "/images/activity-5.JPG", alt: "Obstacle course" },
-  { src: "/images/activity-6.JPG", alt: "Playground" },
-  { src: "/images/activity-7.JPG", alt: "Cycling" },
-  { src: "/images/activity-8.JPG", alt: "Zipline" },
-  { src: "/images/activity-9.JPG", alt: "Paintball" },
-  { src: "/images/activity-10.JPG", alt: "Sauna" },
-  { src: "/images/activity-11.JPG", alt: "River raft" },
-  { src: "/images/activity-12.JPG", alt: "Water park" },
+  { src: "/images/activity-new-1.jpg", alt: "Water park spray rings" },
+  { src: "/images/activity-new-2.jpg", alt: "Kayaking at the resort" },
+  { src: "/images/activity-new-3.jpg", alt: "Inflatable monster water park" },
+  { src: "/images/activity-new-4.jpg", alt: "Aqua park aerial view" },
+  { src: "/images/activity-new-5.jpg", alt: "Pedal boat fun on the lake" },
+  { src: "/images/activity-new-6.jpg", alt: "Giant slide aerial overview" },
+  { src: "/images/activity-new-7.jpg", alt: "Yellow monster inflatable slide" },
+  { src: "/images/activity-new-8.jpg", alt: "Group raft towing on the lake" },
+  { src: "/images/activity-new-9.jpg", alt: "Wet raft group activity" },
+  { src: "/images/activity-new-10.jpg", alt: "Lake view floating villa room" },
+  { src: "/images/activity-new-11.jpg", alt: "Floating villa bedroom" },
+  { src: "/images/activity-new-12.jpg", alt: "Floating villas aerial sunset" },
+  { src: "/images/activity-new-13.jpg", alt: "Resort buffet breakfast hall" },
+  { src: "/images/activity-new-14.jpg", alt: "Lakeside room with balcony" },
+  { src: "/images/activity-new-15.jpg", alt: "Open-air restaurant overlooking water park" },
+  { src: "/images/activity-new-16.jpg", alt: "Buffet dining setup" },
 ]
 
 export default function ActivitiesSection() {

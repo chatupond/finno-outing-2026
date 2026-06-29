@@ -25,7 +25,7 @@ export default function HeroJoinButton() {
     <button
       onClick={handleClick}
       disabled={loading || isSessionLoading}
-      className="inline-flex items-center justify-center gap-2 bg-primary text-secondary font-bold text-base px-8 py-4 rounded-full hover:bg-yellow-300 transition-all duration-200 hover:scale-105 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
+      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-secondary font-bold text-sm sm:text-base px-5 py-3 sm:px-8 sm:py-4 rounded-full hover:bg-yellow-300 transition-all duration-200 hover:scale-105 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
     >
       {loading || isSessionLoading ? (
         <>

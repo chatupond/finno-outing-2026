@@ -143,7 +143,7 @@ function AlreadyRegistered({ name, onClose }: { name: string; onClose: () => voi
           Registered, {name.split(" ")[0]}! 🎉
         </h3>
         <p className="text-white/60 text-sm">
-          Your seat is confirmed. See you at Heaven Kwai Resort!
+          Your seat is confirmed. See you at Lake Heaven Resort!
         </p>
       </div>
       <div className="flex flex-col gap-2 w-full">
@@ -307,7 +307,7 @@ export default function RegistrationModal() {
         {/* Footer */}
         <div className="px-7 pb-6">
           <p className="text-white/20 text-xs text-center">
-            16–17 October 2026 · Heaven Kwai Resort, Kanchanaburi
+            16–17 October 2026 · Lake Heaven Resort, Kanchanaburi
           </p>
         </div>
       </div>

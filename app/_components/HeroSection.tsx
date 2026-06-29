@@ -94,13 +94,13 @@ export default function HeroSection() {
               />
             </svg>
             <span className="text-white text-sm font-medium">
-              Heaven Kwai Resort, Kanchanaburi
+              Lake Heaven Resort, Kanchanaburi
             </span>
           </div>
         </div>
 
         {/* CTAs */}
-        <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row justify-center gap-4">
+        <div className="animate-fade-in-up delay-300 grid grid-cols-2 sm:flex sm:flex-row justify-center gap-4">
           <HeroJoinButton />
           <ScrollToAttendeesButton />
         </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useTransition } from "react"
+import { useState, useEffect, useTransition, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { useSession, signOut, signIn } from "next-auth/react"
 import Image from "next/image"
@@ -9,10 +9,26 @@ import { useRegistrationModal } from "./RegistrationModalContext"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
   const { isRegistered, setIsRegistered } = useRegistrationModal()
   const { data: session, status } = useSession()
   const router = useRouter()
   const [optOutPending, startOptOut] = useTransition()
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("touchstart", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener("touchstart", handleClickOutside)
+    }
+  }, [])
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -60,37 +76,44 @@ export default function Navbar() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           {status === "authenticated" && session?.user ? (
-            <div className="group relative flex items-center gap-2 cursor-default">
-              {session.user.image ? (
-                <Image
-                  src={session.user.image}
-                  alt={session.user.name ?? "User"}
-                  width={32}
-                  height={32}
-                  className="rounded-full border-2 border-primary/40"
-                />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center">
-                  <span className="text-primary text-xs font-bold">
-                    {session.user.name?.[0]?.toUpperCase() ?? "U"}
-                  </span>
-                </div>
-              )}
-              <span className="text-white/80 text-sm font-medium select-none">
-                {session.user.name?.split(" ")[0]}
-              </span>
-              <svg
-                className="w-3 h-3 text-white/30 transition-transform duration-200 group-hover:rotate-180"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
+            <div ref={menuRef} className="relative flex items-center gap-2">
+              <button
+                onClick={() => setMenuOpen(o => !o)}
+                className="flex items-center gap-2 cursor-pointer"
+                aria-expanded={menuOpen}
+                aria-haspopup="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+                {session.user.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name ?? "User"}
+                    width={32}
+                    height={32}
+                    className="rounded-full border-2 border-primary/40"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center">
+                    <span className="text-primary text-xs font-bold">
+                      {session.user.name?.[0]?.toUpperCase() ?? "U"}
+                    </span>
+                  </div>
+                )}
+                <span className="text-white/80 text-sm font-medium select-none">
+                  {session.user.name?.split(" ")[0]}
+                </span>
+                <svg
+                  className={`w-3 h-3 text-white/30 transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
 
               {/* Popover */}
-              <div className="absolute top-full right-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-10">
+              <div className={`absolute top-full right-0 pt-3 transition-all duration-150 z-10 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
                 <div
                   className="rounded-xl border border-white/10 shadow-2xl py-1 min-w-[160px] overflow-hidden"
                   style={{ backgroundColor: "rgba(1, 23, 43, 0.97)", backdropFilter: "blur(12px)" }}
@@ -101,7 +124,7 @@ export default function Navbar() {
                   {isRegistered && (
                     <>
                       <button
-                        onClick={handleOptOut}
+                        onClick={() => { setMenuOpen(false); handleOptOut() }}
                         disabled={optOutPending}
                         className="w-full text-left px-4 py-2.5 text-sm text-red-400/80 hover:text-red-400 hover:bg-red-400/8 transition-colors flex items-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
@@ -121,7 +144,7 @@ export default function Navbar() {
                     </>
                   )}
                   <button
-                    onClick={() => signOut()}
+                    onClick={() => { setMenuOpen(false); signOut() }}
                     className="w-full text-left px-4 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/8 transition-colors flex items-center gap-2.5"
                   >
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

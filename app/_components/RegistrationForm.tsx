@@ -21,6 +21,7 @@ const teams = [
   "DBS",
   "Product",
   "UX",
+  "Mobility",
   "Others",
 ]
 

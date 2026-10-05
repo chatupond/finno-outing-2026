@@ -41,10 +41,11 @@ function AttendeesSkeleton() {
 
 function CarsSkeleton() {
   return (
-    <section className="py-28 bg-secondary">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-16 bg-white/10 rounded-2xl w-64 mb-16 animate-pulse" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen bg-secondary">
+      <div className="lg:col-span-6 h-[60vh] lg:h-screen bg-white/5 animate-pulse" />
+      <div className="lg:col-span-6 px-6 sm:px-10 xl:px-16 py-28">
+        <div className="h-16 bg-white/10 rounded-2xl w-64 mb-12 animate-pulse" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="glass rounded-2xl overflow-hidden">
               <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">

@@ -1,5 +1,7 @@
 import { auth } from "@/auth"
 import { getCars, type Car } from "@/app/lib/sheets"
+import RouteMap from "./RouteMap"
+import route from "./carRoute.json"
 
 function CarCard({ car }: { car: Car }) {
   return (
@@ -56,11 +58,43 @@ export default async function CarsSection() {
   const cars = await getCars()
   if (cars.length === 0) return null
 
+  const hours = Math.floor(route.durationMin / 60)
+  const minutes = route.durationMin % 60
+
   return (
-    <section id="cars" className="relative py-28 bg-secondary section-divider">
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+    <section id="cars" className="relative bg-secondary section-divider grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
+      {/* Left (6/12) — route map */}
+      <div className="lg:col-span-6 relative isolate overflow-hidden h-[60vh] min-h-[420px] lg:h-screen lg:sticky lg:top-0">
+        <RouteMap />
+
+        {/* Trip summary */}
+        <div className="absolute top-20 left-4 right-4 max-w-md z-[1000] bg-white/90 backdrop-blur-md border border-secondary/10 shadow-lg rounded-2xl p-4 sm:p-5 pointer-events-none">
+          <p className="text-secondary/50 text-xs font-semibold tracking-widest uppercase mb-2">Route</p>
+          <p className="text-secondary font-bold leading-snug mb-4">
+            Block28 <span className="text-green-600">→</span> Lake Heaven Resort
+          </p>
+          <div className="grid grid-cols-3 gap-3">
+            <div>
+              <p className="text-secondary text-xl font-black leading-none">{route.distanceKm}</p>
+              <p className="text-dark-text/50 text-xs mt-1">km</p>
+            </div>
+            <div>
+              <p className="text-secondary text-xl font-black leading-none">
+                ~{hours}:{String(minutes).padStart(2, "0")}
+              </p>
+              <p className="text-dark-text/50 text-xs mt-1">hrs drive</p>
+            </div>
+            <div>
+              <p className="text-green-600 text-xl font-black leading-none">M81</p>
+              <p className="text-dark-text/50 text-xs mt-1">{route.m81Km} km motorway</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right (6/12) — car list */}
+      <div className="lg:col-span-6 px-6 sm:px-10 xl:px-16 py-20 lg:py-28">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
             <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -75,15 +109,13 @@ export default async function CarsSection() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="text-center">
-              <p className="text-5xl font-black text-white">{cars.length}</p>
-              <p className="text-white/40 text-sm font-medium mt-1">Cars</p>
-            </div>
+          <div className="text-center">
+            <p className="text-5xl font-black text-white">{cars.length}</p>
+            <p className="text-white/40 text-sm font-medium mt-1">Cars</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {cars.map((car) => (
             <CarCard key={car.carNo} car={car} />
           ))}

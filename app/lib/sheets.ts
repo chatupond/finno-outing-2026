@@ -62,6 +62,56 @@ export async function checkExistingRegistration(email: string): Promise<boolean>
   return attendees.some((a) => a.email === email)
 }
 
+export type Car = {
+  carNo: string
+  driver: string
+  passengers: string[]
+}
+
+export async function getCars(): Promise<Car[]> {
+  try {
+    const sheets = google.sheets({ version: "v4", auth: getAuth() })
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Cars!A2:F",
+    })
+    const rows = response.data.values ?? []
+    return rows
+      .filter((row) => row[0])
+      .map((row) => ({
+        carNo: row[0] ?? "",
+        driver: row[1] ?? "",
+        passengers: row.slice(2).filter((p) => p?.trim()),
+      }))
+  } catch {
+    return []
+  }
+}
+
+export type Bedroom = {
+  room: string
+  sleepers: string[]
+}
+
+export async function getBedrooms(): Promise<Bedroom[]> {
+  try {
+    const sheets = google.sheets({ version: "v4", auth: getAuth() })
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Bedroom!A2:F",
+    })
+    const rows = response.data.values ?? []
+    return rows
+      .filter((row) => row[0]?.trim())
+      .map((row) => ({
+        room: row[0].trim(),
+        sleepers: row.slice(1).filter((p) => p?.trim()),
+      }))
+  } catch {
+    return []
+  }
+}
+
 export async function removeAttendee(email: string): Promise<boolean> {
   const sheets = google.sheets({ version: "v4", auth: getAuth() })
 

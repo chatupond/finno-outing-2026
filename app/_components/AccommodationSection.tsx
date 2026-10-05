@@ -161,7 +161,7 @@ export default function AccommodationSection() {
                     href={item.mapUrl as string}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Open in Google Maps"
+                    aria-label="Google Maps"
                     className="ml-1 text-secondary/40 hover:text-secondary transition-colors duration-150"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

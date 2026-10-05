@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist } from "next/font/google"
+import { Geist, Prompt } from "next/font/google"
 import "./globals.css"
 import SessionProvider from "./_components/SessionProvider"
 import RegistrationModalWrapper from "./_components/RegistrationModalWrapper"
@@ -7,6 +7,13 @@ import RegistrationModalWrapper from "./_components/RegistrationModalWrapper"
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
+})
+
+// Thai text: Geist has no Thai glyphs, so the browser falls through to Prompt for them
+const prompt = Prompt({
+  subsets: ["thai"],
+  weight: ["300", "400", "500", "600", "700", "900"],
+  variable: "--font-prompt",
 })
 
 export const metadata: Metadata = {
@@ -50,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-secondary font-sans antialiased" style={{ fontFamily: "var(--font-geist), system-ui, sans-serif" }}>
+    <html lang="en" className={`${geist.variable} ${prompt.variable} scroll-smooth`}>
+      <body className="min-h-screen bg-secondary font-sans antialiased" style={{ fontFamily: "var(--font-geist), var(--font-prompt), system-ui, sans-serif" }}>
         <SessionProvider>
           <RegistrationModalWrapper>{children}</RegistrationModalWrapper>
         </SessionProvider>

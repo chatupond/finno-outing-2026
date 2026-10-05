@@ -1,0 +1,59 @@
+import { useId } from "react"
+
+/** Full-colour brand icons for the map / social link buttons. */
+
+export function FacebookIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      {/* White disc shows through the "f" cut out of the official logo shape */}
+      <circle cx="12" cy="12" r="11" fill="#fff" />
+      <path
+        fill="#0866FF"
+        d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"
+      />
+    </svg>
+  )
+}
+
+export function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
+  const id = useId()
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <radialGradient id={id} cx="0.3" cy="1.07" r="1.3">
+          <stop offset="0" stopColor="#FDF497" />
+          <stop offset="0.1" stopColor="#FDF497" />
+          <stop offset="0.5" stopColor="#FD5949" />
+          <stop offset="0.68" stopColor="#D6249F" />
+          <stop offset="1" stopColor="#285AEB" />
+        </radialGradient>
+      </defs>
+      <rect width="24" height="24" rx="6" fill={`url(#${id})`} />
+      <rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="3.4" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="16.3" cy="7.7" r="1.05" fill="#fff" />
+    </svg>
+  )
+}
+
+export function GoogleMapsIcon({ className = "w-5 h-5" }: { className?: string }) {
+  const id = useId()
+  const pin =
+    "M12 1C7.3 1 3.5 4.7 3.5 9.3c0 6.1 7.1 12.6 7.8 13.2a1.05 1.05 0 0 0 1.4 0c.7-.6 7.8-7.1 7.8-13.2C20.5 4.7 16.7 1 12 1Z"
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <clipPath id={id}>
+          <path d={pin} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${id})`}>
+        <rect width="24" height="24" fill="#34A853" />
+        <path fill="#FBBC04" d="M0 9.3h12L0 21.3Z" />
+        <path fill="#4285F4" d="M0 0h12v9.3H0Z" />
+        <path fill="#EA4335" d="M12 0h12v9.3H12Z" />
+      </g>
+      <circle cx="12" cy="9.3" r="3.1" fill="#fff" />
+    </svg>
+  )
+}

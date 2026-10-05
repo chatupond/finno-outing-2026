@@ -3,6 +3,7 @@
 import { useState } from "react"
 import PhotoShowcase from "./PhotoShowcase"
 import TypingText from "./TypingText"
+import { GoogleMapsIcon, FacebookIcon } from "./BrandIcons"
 
 const photos = [
   { src: "/images/lake-heaven-resort-1.jpg", alt: "Lake Heaven Resort Water Park Overview" },
@@ -88,21 +89,12 @@ const links = [
   {
     label: "Google Maps",
     href: "https://maps.google.com/?q=Lake+Heaven+Resort+Kanchanaburi+Thailand",
-    icon: (
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    icon: <GoogleMapsIcon />,
   },
   {
     label: "Facebook",
     href: "https://www.facebook.com/LakeHeavenResort",
-    icon: (
-      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z" />
-      </svg>
-    ),
+    icon: <FacebookIcon />,
   },
 ]
 

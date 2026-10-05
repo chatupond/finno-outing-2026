@@ -40,12 +40,12 @@ export default function HeroSection() {
         {/* Logo */}
         <div className="animate-fade-in-up flex justify-center mb-8">
           <Image
-            src="/images/logo.png"
-            alt="Finnomena Tech Outing 2026"
-            width={750}
-            height={612}
+            src="/images/hero-logo.png"
+            alt="Finnomena Builder Outing 2026"
+            width={1774}
+            height={887}
             priority
-            className="w-56 sm:w-72 lg:w-96 h-auto drop-shadow-2xl"
+            className="w-72 sm:w-[28rem] lg:w-[36rem] h-auto drop-shadow-2xl"
           />
         </div>
 

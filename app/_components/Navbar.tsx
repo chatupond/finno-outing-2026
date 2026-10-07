@@ -65,11 +65,11 @@ export default function Navbar() {
         {/* Logo */}
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center">
           <Image
-            src="/images/logo-builder-2026.png"
+            src="/images/logo-mark.png"
             alt="Finnomena Builder Outing 2026"
-            width={707}
-            height={353}
-            className="h-10 w-auto"
+            width={512}
+            height={512}
+            className="h-10 w-10 rounded-xl"
           />
         </button>
 

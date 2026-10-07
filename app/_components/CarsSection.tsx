@@ -1,7 +1,6 @@
 import { auth } from "@/auth"
 import { getCars, type Car } from "@/app/lib/sheets"
-import RouteMap from "./RouteMap"
-import route from "./carRoute.json"
+import TripRouteMap from "./TripRouteMap"
 
 function CarCard({ car }: { car: Car }) {
   return (
@@ -58,38 +57,11 @@ export default async function CarsSection() {
   const cars = await getCars()
   if (cars.length === 0) return null
 
-  const hours = Math.floor(route.durationMin / 60)
-  const minutes = route.durationMin % 60
-
   return (
     <section id="cars" className="relative bg-secondary section-divider grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
       {/* Left (6/12) — route map */}
       <div className="lg:col-span-6 relative isolate overflow-hidden h-[60vh] min-h-[420px] lg:h-screen lg:sticky lg:top-0">
-        <RouteMap />
-
-        {/* Trip summary */}
-        <div className="absolute top-20 left-4 right-4 max-w-md z-[1000] bg-white/90 backdrop-blur-md border border-secondary/10 shadow-lg rounded-2xl p-4 sm:p-5 pointer-events-none">
-          <p className="text-secondary/50 text-xs font-semibold tracking-widest uppercase mb-2">Route</p>
-          <p className="text-secondary font-bold leading-snug mb-4">
-            Block28 <span className="text-green-600">→</span> Lake Heaven Resort
-          </p>
-          <div className="grid grid-cols-3 gap-3">
-            <div>
-              <p className="text-secondary text-xl font-black leading-none">{route.distanceKm}</p>
-              <p className="text-dark-text/50 text-xs mt-1">km</p>
-            </div>
-            <div>
-              <p className="text-secondary text-xl font-black leading-none">
-                ~{hours}:{String(minutes).padStart(2, "0")}
-              </p>
-              <p className="text-dark-text/50 text-xs mt-1">hrs drive</p>
-            </div>
-            <div>
-              <p className="text-green-600 text-xl font-black leading-none">M81</p>
-              <p className="text-dark-text/50 text-xs mt-1">{route.m81Km} km motorway</p>
-            </div>
-          </div>
-        </div>
+        <TripRouteMap />
       </div>
 
       {/* Right (6/12) — car list */}

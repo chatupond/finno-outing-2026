@@ -8,11 +8,11 @@ export default function AuthErrorPage() {
       <div className="w-full max-w-md text-center">
         <div className="flex justify-center mb-8">
           <Image
-            src="/images/logo-builder-2026.png"
+            src="/images/logo-mark.png"
             alt="Finnomena Builder Outing 2026"
-            width={707}
-            height={353}
-            className="h-16 w-auto"
+            width={512}
+            height={512}
+            className="h-16 w-16 rounded-xl"
           />
         </div>
 

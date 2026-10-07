@@ -204,6 +204,17 @@ button, a {
   box-shadow: 0 2px 8px rgba(1, 23, 43, 0.25);
 }
 
+/* Province-style label, matching the basemap's place names */
+.route-place {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font: 600 13px/1 system-ui, sans-serif;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(1, 23, 43, 0.45);
+  white-space: nowrap;
+}
+
 @keyframes route-pulse {
   70% {
     box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);

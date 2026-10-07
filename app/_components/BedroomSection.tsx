@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import { getBedrooms, type Bedroom } from "@/app/lib/sheets"
 import RoomSlider from "./RoomSlider"
 import StickyPanel from "./StickyPanel"
+import VideoButton from "./VideoButton"
 
 const icons = {
   guests: (
@@ -25,6 +26,7 @@ const roomTypes = [
   {
     name: "แพดาหลา",
     description: "ห้องพักลอยน้ำสำหรับ 2 ท่าน วิวทะเลสาบ",
+    videoId: "ujOElsdKOl8",
     features: [{ icon: icons.guests, label: "2 Guests" }],
     photos: [
       { src: "/images/room-dahla-1.jpg", alt: "แพดาหลา bedroom with double bed and dressing table" },
@@ -35,6 +37,7 @@ const roomTypes = [
   {
     name: "แพเบญจมาศ",
     description: "แพหลังใหญ่สำหรับ 12 ท่าน พร้อมระเบียงริมน้ำ",
+    videoId: "Cx72Lxliv6A",
     features: [
       { icon: icons.guests, label: "12 Guests" },
       { icon: icons.bed, label: "6 Bedrooms" },
@@ -176,6 +179,7 @@ export default async function BedroomSection() {
                         {feature.label}
                       </span>
                     ))}
+                    <VideoButton videoId={room.videoId} title={`${room.name} video tour`} />
                   </div>
                 </div>
               </div>

@@ -9,6 +9,7 @@ import CafesSection from "./_components/CafesSection"
 import AttendeesSection from "./_components/AttendeesSection"
 import CarsSection from "./_components/CarsSection"
 import BedroomSection from "./_components/BedroomSection"
+import ResortMapSection from "./_components/ResortMapSection"
 import BackToTopButton from "./_components/BackToTopButton"
 
 function AttendeesSkeleton() {
@@ -104,6 +105,7 @@ export default function Home() {
         <Suspense fallback={<BedroomSkeleton />}>
           <BedroomSection />
         </Suspense>
+        <ResortMapSection />
         <LunchSection />
         <CafesSection />
       </main>
@@ -111,11 +113,11 @@ export default function Home() {
       <footer className="bg-secondary-dark py-10 border-t border-white/5" style={{ backgroundColor: "#00101e" }}>
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Image
-            src="/images/logo-builder-2026.png"
+            src="/images/logo-mark.png"
             alt="Finnomena Builder Outing 2026"
-            width={707}
-            height={353}
-            className="h-10 w-auto"
+            width={512}
+            height={512}
+            className="h-10 w-10 rounded-xl"
           />
           <p className="text-white/30 text-xs text-center">
             16–17 October 2026 · Lake Heaven Resort, Kanchanaburi

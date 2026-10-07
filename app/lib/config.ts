@@ -1,3 +1,6 @@
+/** Registration deadline has passed — no new sign-ups, but logged-in users can still view trip data */
+export const REGISTRATION_CLOSED = true
+
 export const ALLOWED_DOMAINS = ["finnomena.com", "fint.finance"]
 
 export const ALLOWED_EMAILS = ["chatupond.b@gmail.com"]

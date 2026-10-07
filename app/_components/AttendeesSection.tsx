@@ -1,7 +1,7 @@
 import { auth } from "@/auth"
 import { getAttendees, type Attendee } from "@/app/lib/sheets"
 import Image from "next/image"
-import AttendeesLoginGate from "./AttendeesLoginGate"
+import LoginWall from "./LoginWall"
 import HeroJoinButton from "./HeroJoinButton"
 
 type GroupedTeam = {
@@ -83,13 +83,25 @@ function TeamCard({ team }: { team: GroupedTeam }) {
   )
 }
 
+/** Fake roster shown blurred behind the login wall — never real data */
+const PLACEHOLDER_NAMES = ["Somchai Builder", "Nok Finno", "Pim Outing", "Kanchana Lake", "Arthit Heaven", "Mali Raft"]
+const PLACEHOLDER_ATTENDEES: Attendee[] = (
+  [["Backend", 5], ["Data", 3], ["Design", 4], ["Frontend", 6], ["Mobile", 4], ["Platform", 3], ["Product", 5], ["QA", 4]] as const
+).flatMap(([team, size]) =>
+  Array.from({ length: size }, (_, i) => ({
+    timestamp: "",
+    name: PLACEHOLDER_NAMES[i % PLACEHOLDER_NAMES.length],
+    email: "",
+    team,
+    imageUrl: "",
+  }))
+)
+
 export default async function AttendeesSection() {
   const session = await auth()
-  if (!session?.user) {
-    return <AttendeesLoginGate />
-  }
+  const locked = !session?.user
 
-  const attendees = await getAttendees()
+  const attendees = locked ? PLACEHOLDER_ATTENDEES : await getAttendees()
   const teams = groupByTeam(attendees)
   const total = attendees.length
 
@@ -114,7 +126,7 @@ export default async function AttendeesSection() {
           </div>
 
           {/* Total count */}
-          <div className="flex items-center gap-6">
+          {!locked && <div className="flex items-center gap-6">
             <div className="text-center">
               <p className="text-5xl font-black text-secondary">{total}</p>
               <p className="text-dark-text/50 text-sm font-medium mt-1">
@@ -126,10 +138,22 @@ export default async function AttendeesSection() {
               <p className="text-5xl font-black text-secondary">{teams.length}</p>
               <p className="text-dark-text/50 text-sm font-medium mt-1">Teams</p>
             </div>
-          </div>
+          </div>}
         </div>
 
-        {total === 0 ? (
+        {locked ? (
+          <LoginWall
+            sectionId="attendees"
+            title="Log in to view the attendee list"
+            description="Sign in with your Google account to see who's joining the trip."
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {teams.map((team) => (
+                <TeamCard key={team.name} team={team} />
+              ))}
+            </div>
+          </LoginWall>
+        ) : total === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-5 text-center">
             <div className="w-20 h-20 rounded-2xl bg-secondary/5 flex items-center justify-center">
               <svg

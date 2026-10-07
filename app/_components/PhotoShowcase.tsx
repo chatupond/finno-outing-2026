@@ -44,7 +44,6 @@ export default function PhotoShowcase({ photos }: { photos: LightboxImage[] }) {
                 i === active ? "opacity-100" : "opacity-0"
               }`}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              priority={i === 0}
             />
           ))}
           <div className="absolute inset-0 bg-linear-to-t from-secondary via-secondary/10 to-transparent" />

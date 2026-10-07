@@ -6,12 +6,13 @@ import { useSession, signOut, signIn } from "next-auth/react"
 import Image from "next/image"
 import { checkMyRegistration, optOutTrip } from "@/app/actions/register"
 import { useRegistrationModal } from "./RegistrationModalContext"
+import { REGISTRATION_CLOSED } from "@/app/lib/config"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const { isRegistered, setIsRegistered } = useRegistrationModal()
+  const { isRegistered, setIsRegistered, openModal } = useRegistrationModal()
   const { data: session, status } = useSession()
   const router = useRouter()
   const [optOutPending, startOptOut] = useTransition()
@@ -121,7 +122,7 @@ export default function Navbar() {
                   <div className="px-4 py-2.5 border-b border-white/8">
                     <p className="text-white/40 text-xs truncate">{session.user.email}</p>
                   </div>
-                  {isRegistered && (
+                  {isRegistered && !REGISTRATION_CLOSED && (
                     <>
                       <button
                         onClick={() => { setMenuOpen(false); handleOptOut() }}
@@ -157,7 +158,11 @@ export default function Navbar() {
             </div>
           ) : (
             <button
-              onClick={() => signIn("google", { redirectTo: "/?register=1" }, { prompt: "select_account" })}
+              onClick={() =>
+                REGISTRATION_CLOSED
+                  ? openModal()
+                  : signIn("google", { redirectTo: "/?register=1" }, { prompt: "select_account" })
+              }
               className="bg-primary text-secondary font-bold text-sm px-5 py-2 rounded-full hover:bg-yellow-300 transition-all duration-200 hover:scale-105"
             >
               Join trip now!

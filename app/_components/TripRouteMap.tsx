@@ -4,7 +4,7 @@ import { useState } from "react"
 import RouteMap from "./RouteMap"
 import { tripRoutes } from "./tripRoutes"
 
-/** Route map with a Day 1 / Day 2 switch and a trip summary card overlaid on top. */
+/** Route map with a Day 1 / Day 2 / Return switch and a trip summary card overlaid on top. */
 export default function TripRouteMap() {
   const [active, setActive] = useState(0)
   const route = tripRoutes[active]
@@ -17,7 +17,9 @@ export default function TripRouteMap() {
 
       {/* Trip summary */}
       <div className="absolute top-20 left-4 right-4 max-w-md z-[1000] bg-white/90 backdrop-blur-md border border-secondary/10 shadow-lg rounded-2xl p-4 sm:p-5 pointer-events-none">
-        <p className="text-secondary/50 text-xs font-semibold tracking-widest uppercase mb-2">Route</p>
+        <p className="text-secondary/50 text-xs font-semibold tracking-widest uppercase mb-2">
+          {route.day} · {route.leg}
+        </p>
         <p className="text-secondary font-bold leading-snug mb-4">
           {route.from} <span className="text-green-600">→</span> {route.to}
         </p>
@@ -49,7 +51,7 @@ export default function TripRouteMap() {
       >
         {tripRoutes.map((r, i) => (
           <button
-            key={r.day}
+            key={r.tab}
             type="button"
             role="tab"
             aria-selected={i === active}
@@ -58,7 +60,7 @@ export default function TripRouteMap() {
               i === active ? "bg-secondary text-white" : "text-secondary/60 hover:text-secondary"
             }`}
           >
-            {r.day}
+            {r.tab}
           </button>
         ))}
       </div>

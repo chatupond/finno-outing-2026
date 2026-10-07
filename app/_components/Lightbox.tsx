@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback, useRef } from "react"
+import { createPortal } from "react-dom"
 import Image from "next/image"
 
 export type LightboxImage = {
@@ -64,7 +65,9 @@ export default function Lightbox({ images, startIndex, onClose }: Props) {
   const image = images[current]
   const hasMultiple = images.length > 1
 
-  return (
+  // Portal to <body> so the lightbox always covers the navbar, even when opened from inside
+  // a sticky or transformed parent (e.g. the bedroom panel) that creates its own stacking context
+  return createPortal(
     <div className="fixed inset-0 z-[300] flex items-center justify-center">
       {/* Backdrop */}
       <div
@@ -104,7 +107,7 @@ export default function Lightbox({ images, startIndex, onClose }: Props) {
             fill
             className="object-contain"
             sizes="100vw"
-            priority
+            loading="eager"
           />
         </div>
       </div>
@@ -156,7 +159,8 @@ export default function Lightbox({ images, startIndex, onClose }: Props) {
           ))}
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   )
 }
 

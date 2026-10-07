@@ -7,7 +7,7 @@ import {
   removeAttendee,
 } from "@/app/lib/sheets"
 import { revalidatePath } from "next/cache"
-import { isAllowedEmail } from "@/app/lib/config"
+import { REGISTRATION_CLOSED, isAllowedEmail } from "@/app/lib/config"
 
 export async function checkMyRegistration(): Promise<boolean> {
   const session = await auth()
@@ -25,6 +25,10 @@ export async function registerAttendee(
   prevState: RegisterState,
   formData: FormData
 ): Promise<RegisterState> {
+  if (REGISTRATION_CLOSED) {
+    return { error: "Registration is closed." }
+  }
+
   const session = await auth()
   if (!session?.user?.email) {
     return { error: "Not authenticated" }
@@ -61,6 +65,10 @@ export type OptOutState = {
 export async function optOutTrip(
   prevState: OptOutState
 ): Promise<OptOutState> {
+  if (REGISTRATION_CLOSED) {
+    return { error: "Registration is closed, so the attendee list can no longer be changed." }
+  }
+
   const session = await auth()
   if (!session?.user?.email) {
     return { error: "Not authenticated" }

@@ -3,6 +3,7 @@ import { getBedrooms, type Bedroom } from "@/app/lib/sheets"
 import RoomSlider from "./RoomSlider"
 import StickyPanel from "./StickyPanel"
 import VideoButton from "./VideoButton"
+import LoginWall from "./LoginWall"
 
 const icons = {
   guests: (
@@ -138,14 +139,53 @@ function HouseCard({ house, type }: { house: House; type: string }) {
   )
 }
 
+/** Fake arrangement shown blurred behind the login wall — never real data */
+const PLACEHOLDER_SLEEPERS = ["Somchai Builder", "Nok Finno", "Pim Outing", "Kanchana Lake"]
+const PLACEHOLDER_BEDROOMS: Bedroom[] = [
+  ...[21, 22, 23, 24, 25, 26].map((n) => ({ room: `แพดาหลา ${n}`, sleepers: PLACEHOLDER_SLEEPERS.slice(n % 2, (n % 2) + 2) })),
+  ...[1, 2, 3, 4, 5, 6].map((n) => ({ room: `แพเบญจมาศ 1 (${n})`, sleepers: PLACEHOLDER_SLEEPERS.slice(0, 2) })),
+]
+
 export default async function BedroomSection() {
   const session = await auth()
-  if (!session?.user) return null
+  const locked = !session?.user
 
-  const rows = await getBedrooms()
+  const rows = locked ? PLACEHOLDER_BEDROOMS : await getBedrooms()
   if (rows.length === 0) return null
 
   const groups = groupBedrooms(rows)
+
+  const arrangement = (
+    <div className="space-y-14">
+      {groups.map((group) => {
+        const multiBedroom = group.houses.some((h) => h.bedrooms.some((b) => b.label))
+        return (
+          <div key={group.type}>
+            <div className="flex items-center gap-4 mb-6">
+              <h3 className="text-secondary text-xl font-black whitespace-nowrap">{group.type}</h3>
+              <span className="h-px flex-1 bg-secondary/10" />
+              <span className="text-dark-text/40 text-sm font-medium whitespace-nowrap">
+                {group.houses.length} {multiBedroom ? "แพ" : "ห้อง"}
+              </span>
+            </div>
+            {multiBedroom ? (
+              <div className="space-y-6">
+                {group.houses.map((house) => (
+                  <HouseCard key={house.name} house={house} type={group.type} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {group.houses.map((house) => (
+                  <RoomCard key={house.name} house={house} />
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
 
   return (
     <section id="bedrooms" className="relative section-divider grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
@@ -190,37 +230,17 @@ export default async function BedroomSection() {
 
       {/* Right (8/12) — arrangement from the Bedroom sheet */}
       <div className="lg:col-span-8 bg-[#f5f7fa] px-6 sm:px-10 xl:px-16 py-20 lg:py-28">
-   
-
-        <div className="space-y-14">
-          {groups.map((group) => {
-            const multiBedroom = group.houses.some((h) => h.bedrooms.some((b) => b.label))
-            return (
-              <div key={group.type}>
-                <div className="flex items-center gap-4 mb-6">
-                  <h3 className="text-secondary text-xl font-black whitespace-nowrap">{group.type}</h3>
-                  <span className="h-px flex-1 bg-secondary/10" />
-                  <span className="text-dark-text/40 text-sm font-medium whitespace-nowrap">
-                    {group.houses.length} {multiBedroom ? "แพ" : "ห้อง"}
-                  </span>
-                </div>
-                {multiBedroom ? (
-                  <div className="space-y-6">
-                    {group.houses.map((house) => (
-                      <HouseCard key={house.name} house={house} type={group.type} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {group.houses.map((house) => (
-                      <RoomCard key={house.name} house={house} />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
+        {locked ? (
+          <LoginWall
+            sectionId="bedrooms"
+            title="Log in to view bedroom arrangements"
+            description="Sign in with your Google account to see who you're rooming with."
+          >
+            {arrangement}
+          </LoginWall>
+        ) : (
+          arrangement
+        )}
       </div>
     </section>
   )

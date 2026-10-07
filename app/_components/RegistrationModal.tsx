@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useTransition, useActionState } from "react"
 import { useSession, signIn } from "next-auth/react"
-import { useRegistrationModal } from "./RegistrationModalContext"
+import { RESTORE_SCROLL_KEY, useRegistrationModal } from "./RegistrationModalContext"
 import { checkMyRegistration, optOutTrip, type OptOutState } from "@/app/actions/register"
-import { ALLOWED_DOMAINS, isAllowedEmail } from "@/app/lib/config"
+import { ALLOWED_DOMAINS, REGISTRATION_CLOSED, isAllowedEmail } from "@/app/lib/config"
+import { GoogleIcon } from "./BrandIcons"
 import RegistrationForm from "./RegistrationForm"
 
 function Spinner() {
@@ -153,13 +154,56 @@ function AlreadyRegistered({ name, onClose }: { name: string; onClose: () => voi
         >
           Close
         </button>
-        <button
-          onClick={() => setConfirming(true)}
-          className="text-white/30 hover:text-red-400 text-xs transition-colors py-1"
-        >
-          Opt out of this trip
-        </button>
+        {!REGISTRATION_CLOSED && (
+          <button
+            onClick={() => setConfirming(true)}
+            className="text-white/30 hover:text-red-400 text-xs transition-colors py-1"
+          >
+            Opt out of this trip
+          </button>
+        )}
       </div>
+    </div>
+  )
+}
+
+function RegistrationClosed({ signedIn, onClose }: { signedIn: boolean; onClose: () => void }) {
+  return (
+    <div className="flex flex-col items-center text-center gap-5 py-4">
+      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+        <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div>
+        <h3 className="text-white text-xl font-bold mb-1">Registration is closed</h3>
+        <p className="text-white/50 text-sm leading-relaxed">
+          Sorry, the registration period has ended and we&apos;re no longer accepting new sign-ups.
+          {!signedIn && " You can still sign in to view attendees, cars and bedroom arrangements."}
+        </p>
+      </div>
+      {signedIn ? (
+        <button
+          onClick={onClose}
+          className="w-full py-3 rounded-xl bg-primary text-secondary font-bold text-sm hover:bg-yellow-300 transition-colors"
+        >
+          View trip details
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            // Come back to where the user was instead of jumping to a section
+            try {
+              sessionStorage.setItem(RESTORE_SCROLL_KEY, String(window.scrollY))
+            } catch {}
+            signIn("google", { redirectTo: window.location.pathname }, { prompt: "select_account" })
+          }}
+          className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 font-semibold text-sm py-3.5 px-6 rounded-xl hover:bg-gray-50 transition-colors duration-200 shadow-sm"
+        >
+          <GoogleIcon />
+          Sign in to view trip details
+        </button>
+      )}
     </div>
   )
 }
@@ -241,6 +285,10 @@ export default function RegistrationModal() {
     if (status === "loading" || (status === "authenticated" && isRegistered === null)) {
       return <Spinner />
     }
+    // Registered attendees still see their confirmation; everyone else gets the closed notice
+    if (REGISTRATION_CLOSED && !isRegistered) {
+      return <RegistrationClosed signedIn={status === "authenticated"} onClose={closeModal} />
+    }
     if (status === "unauthenticated") {
       return <SignInPrompt />
     }
@@ -288,7 +336,9 @@ export default function RegistrationModal() {
                 Finnomena Tech Outing 2026
               </span>
             </div>
-            <h2 className="text-white text-lg font-bold">Register for the Event</h2>
+            <h2 className="text-white text-lg font-bold">
+              {REGISTRATION_CLOSED ? "Registration Closed" : "Register for the Event"}
+            </h2>
           </div>
           <button
             onClick={closeModal}

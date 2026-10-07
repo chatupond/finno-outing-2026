@@ -2,6 +2,9 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 
+/** sessionStorage key holding the scroll position to return to after the Google sign-in redirect */
+export const RESTORE_SCROLL_KEY = "restoreScrollY"
+
 type ModalCtx = {
   isOpen: boolean
   openModal: () => void

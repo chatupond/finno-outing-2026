@@ -7,8 +7,20 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg"
+      className="relative isolate min-h-screen flex items-center justify-center overflow-hidden bg-secondary"
     >
+      {/* Background photo — the LCP element, so preload it at high priority */}
+      <Image
+        src="/images/hero-image.png"
+        alt=""
+        fill
+        preload
+        fetchPriority="high"
+        sizes="100vw"
+        className="object-cover pointer-events-none"
+      />
+      <div className="absolute inset-0 hero-overlay pointer-events-none" />
+
       {/* Decorative circles */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-pulse-glow pointer-events-none" />
       <div
@@ -38,14 +50,15 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Logo */}
-        <div className="animate-fade-in-up flex justify-center mb-8">
+        <div className="flex justify-center mb-8">
           <Image
             src="/images/hero-logo.png"
             alt="Finnomena Builder Outing 2026"
             width={1774}
             height={887}
-            priority
-            className="w-72 sm:w-[28rem] lg:w-[36rem] h-auto drop-shadow-2xl"
+            preload
+            sizes="(min-width: 1024px) 576px, (min-width: 640px) 448px, 288px"
+            className="w-72 sm:w-[28rem] lg:w-[36rem] h-auto drop-shadow-2xl animate-hero-bounce"
           />
         </div>
 

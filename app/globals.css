@@ -75,6 +75,31 @@ button, a {
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
+/* Hero logo: drops in with a springy rebound, then keeps bouncing gently */
+@keyframes hero-bounce-in {
+  0% { opacity: 0; transform: translateY(-120px) scale(0.6); }
+  45% { opacity: 1; transform: translateY(0) scale(1.06, 0.92); }
+  60% { transform: translateY(-28px) scale(0.97, 1.04); }
+  75% { transform: translateY(0) scale(1.03, 0.97); }
+  87% { transform: translateY(-8px) scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes hero-bounce {
+  0%, 100% { transform: translateY(0) scale(1); animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1); }
+  45% { transform: translateY(-18px) scale(0.99, 1.01); animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1); }
+  /* Squash on landing */
+  88% { transform: translateY(0) scale(1.03, 0.97); }
+}
+
+.animate-hero-bounce {
+  opacity: 0;
+  transform-origin: 50% 100%;
+  animation:
+    hero-bounce-in 1.1s ease-out forwards,
+    hero-bounce 2.4s 1.1s infinite;
+}
+
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
@@ -106,10 +131,9 @@ button, a {
   background-size: 200% auto;
 }
 
-.hero-bg {
-  background:
-    linear-gradient(180deg, rgba(1, 18, 32, 0.55) 0%, rgba(1, 23, 43, 0.72) 60%, rgba(1, 23, 43, 0.92) 100%),
-    url('/images/hero-image.png') center center / cover no-repeat;
+/* Dark overlay on the hero photo (the photo itself is a next/image in HeroSection) */
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(1, 18, 32, 0.55) 0%, rgba(1, 23, 43, 0.72) 60%, rgba(1, 23, 43, 0.92) 100%);
 }
 
 .section-divider {
@@ -227,6 +251,11 @@ button, a {
 @media (prefers-reduced-motion: reduce) {
   .route-flow,
   .route-pin__dot {
+    animation: none;
+  }
+
+  .animate-hero-bounce {
+    opacity: 1;
     animation: none;
   }
 }

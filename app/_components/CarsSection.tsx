@@ -1,6 +1,7 @@
 import { auth } from "@/auth"
 import { getCars, type Car } from "@/app/lib/sheets"
 import TripRouteMap from "./TripRouteMap"
+import LoginWall from "./LoginWall"
 
 function CarCard({ car }: { car: Car }) {
   return (
@@ -50,12 +51,27 @@ function CarCard({ car }: { car: Car }) {
   )
 }
 
+/** Fake cars shown blurred behind the login wall — never real data */
+const PLACEHOLDER_CARS: Car[] = Array.from({ length: 6 }, (_, i) => ({
+  carNo: String(i + 1),
+  driver: "Somchai Builder",
+  passengers: ["Nok Finno", "Pim Outing", "Kanchana Lake", "Arthit Heaven"].slice(0, 2 + (i % 3)),
+}))
+
 export default async function CarsSection() {
   const session = await auth()
-  if (!session?.user) return null
+  const locked = !session?.user
 
-  const cars = await getCars()
+  const cars = locked ? PLACEHOLDER_CARS : await getCars()
   if (cars.length === 0) return null
+
+  const carGrid = (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {cars.map((car) => (
+        <CarCard key={car.carNo} car={car} />
+      ))}
+    </div>
+  )
 
   return (
     <section id="cars" className="relative bg-secondary section-divider grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
@@ -81,17 +97,26 @@ export default async function CarsSection() {
             </h2>
           </div>
 
-          <div className="text-center">
-            <p className="text-5xl font-black text-white">{cars.length}</p>
-            <p className="text-white/40 text-sm font-medium mt-1">Cars</p>
-          </div>
+          {!locked && (
+            <div className="text-center">
+              <p className="text-5xl font-black text-white">{cars.length}</p>
+              <p className="text-white/40 text-sm font-medium mt-1">Cars</p>
+            </div>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {cars.map((car) => (
-            <CarCard key={car.carNo} car={car} />
-          ))}
-        </div>
+        {locked ? (
+          <LoginWall
+            sectionId="cars"
+            tone="dark"
+            title="Log in to view car arrangements"
+            description="Sign in with your Google account to see which car you're riding in."
+          >
+            {carGrid}
+          </LoginWall>
+        ) : (
+          carGrid
+        )}
       </div>
     </section>
   )

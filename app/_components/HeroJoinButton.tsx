@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { signIn, useSession } from "next-auth/react"
 import { useRegistrationModal } from "./RegistrationModalContext"
+import { REGISTRATION_CLOSED } from "@/app/lib/config"
 
 export default function HeroJoinButton() {
   const { status } = useSession()
@@ -12,7 +13,7 @@ export default function HeroJoinButton() {
   const isSessionLoading = status === "loading"
 
   const handleClick = async () => {
-    if (status === "authenticated") {
+    if (REGISTRATION_CLOSED || status === "authenticated") {
       openModal()
     } else if (status === "unauthenticated") {
       setLoading(true)
@@ -24,10 +25,10 @@ export default function HeroJoinButton() {
   return (
     <button
       onClick={handleClick}
-      disabled={loading || isSessionLoading}
+      disabled={loading || (isSessionLoading && !REGISTRATION_CLOSED)}
       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-secondary font-bold text-sm sm:text-base px-5 py-3 sm:px-8 sm:py-4 rounded-full hover:bg-yellow-300 transition-all duration-200 hover:scale-105 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
     >
-      {loading || isSessionLoading ? (
+      {loading || (isSessionLoading && !REGISTRATION_CLOSED) ? (
         <>
           <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />

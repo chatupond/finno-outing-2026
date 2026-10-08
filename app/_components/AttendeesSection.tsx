@@ -58,8 +58,8 @@ function TeamCard({ team }: { team: GroupedTeam }) {
       {/* Team header */}
       <div className="px-5 py-4 border-b border-secondary/8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary/15 rounded-lg flex items-center justify-center">
-            <span className="text-secondary text-sm font-black">{team.name[0]}</span>
+          <div className="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center">
+            <span className="text-white text-sm font-black">{team.name[0]}</span>
           </div>
           <h3 className="text-secondary font-bold text-base">{team.name}</h3>
         </div>
@@ -112,13 +112,13 @@ export default async function AttendeesSection() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
+            <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="text-white text-xs font-semibold tracking-widest uppercase">
                 Who&apos;s Coming
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-secondary tracking-tight leading-none">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-secondary tracking-tight leading-none text-center lg:text-left">
               Registered
               <br />
               <span className="text-secondary/60">Attendees</span>
@@ -126,7 +126,7 @@ export default async function AttendeesSection() {
           </div>
 
           {/* Total count */}
-          {!locked && <div className="flex items-center gap-6">
+          {!locked && <div className="flex items-center justify-center lg:justify-start gap-6">
             <div className="text-center">
               <p className="text-5xl font-black text-secondary">{total}</p>
               <p className="text-dark-text/50 text-sm font-medium mt-1">

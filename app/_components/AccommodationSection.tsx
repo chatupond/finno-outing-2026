@@ -130,14 +130,14 @@ export default function AccommodationSection() {
         {/* Right: info */}
         <div className="px-8 sm:px-12 lg:px-16 py-16 lg:py-24 flex flex-col justify-center bg-white">
           {/* Label */}
-          <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6 w-fit">
+          <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-white text-xs font-semibold tracking-widest uppercase">
               Where We Stay
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-6">
+          <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-6 text-center lg:text-left">
             Lake Heaven Resort
           </h2>
 

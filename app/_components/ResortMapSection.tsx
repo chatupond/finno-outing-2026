@@ -16,11 +16,11 @@ export default function ResortMapSection() {
     <>
       <section id="resort-map" className="relative py-20 lg:py-28 bg-white section-divider">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
+          <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-white text-xs font-semibold tracking-widest uppercase">Find Your Raft</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-4">
+          <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-4 text-center lg:text-left">
             Resort Map
           </h2>
           <p className="text-dark-text/60 leading-relaxed mb-10 max-w-2xl">

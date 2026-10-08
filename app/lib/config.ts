@@ -3,7 +3,7 @@ export const REGISTRATION_CLOSED = true
 
 export const ALLOWED_DOMAINS = ["finnomena.com", "fint.finance"]
 
-export const ALLOWED_EMAILS = ["chatupond.b@gmail.com"]
+export const ALLOWED_EMAILS = ["chatupond.b@gmail.com", "puttisit1997@gmail.com", "zondezatera@gmail.com", "songpon111333@gmail.com", "riderrm7@gmail.com"]
 
 export function isAllowedEmail(email: string) {
   const lower = email.toLowerCase()

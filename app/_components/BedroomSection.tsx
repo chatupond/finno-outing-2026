@@ -189,19 +189,34 @@ export default async function BedroomSection() {
 
   return (
     <section id="bedrooms" className="relative section-divider grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
-      {/* Left (4/12) — room types; stays in view while the room list scrolls */}
-      <div className="lg:col-span-4 bg-white lg:border-r border-secondary/8">
-        <StickyPanel className="px-6 sm:px-10 xl:px-12 py-20 lg:py-10 lg:sticky">
-          <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-white text-xs font-semibold tracking-widest uppercase">Where We Sleep</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-10">
-            Bedroom
-            <br />
-            Arrangements
-          </h2>
+      {/* Left (8/12) — arrangement from the Bedroom sheet */}
+      <div className="lg:col-span-8 bg-[#f5f7fa] px-6 sm:px-10 xl:px-16 py-20 lg:py-28">
+        <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          <span className="text-white text-xs font-semibold tracking-widest uppercase">Where We Sleep</span>
+        </div>
+        <h2 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-none mb-10 text-center lg:text-left">
+          Bedroom
+          <br />
+          Arrangements
+        </h2>
 
+        {locked ? (
+          <LoginWall
+            sectionId="bedrooms"
+            title="Log in to view bedroom arrangements"
+            description="Sign in with your Google account to see who you're rooming with."
+          >
+            {arrangement}
+          </LoginWall>
+        ) : (
+          arrangement
+        )}
+      </div>
+
+      {/* Right (4/12) — room types; stays in view while the room list scrolls */}
+      <div className="lg:col-span-4 bg-white lg:border-l border-secondary/8">
+        <StickyPanel className="px-6 sm:px-10 xl:px-12 py-20 lg:py-10 lg:sticky">
           <div className="space-y-6">
             {roomTypes.map((room) => (
               <div key={room.name} className="bg-white rounded-2xl border border-secondary/8 shadow-sm p-4">
@@ -226,21 +241,6 @@ export default async function BedroomSection() {
             ))}
           </div>
         </StickyPanel>
-      </div>
-
-      {/* Right (8/12) — arrangement from the Bedroom sheet */}
-      <div className="lg:col-span-8 bg-[#f5f7fa] px-6 sm:px-10 xl:px-16 py-20 lg:py-28">
-        {locked ? (
-          <LoginWall
-            sectionId="bedrooms"
-            title="Log in to view bedroom arrangements"
-            description="Sign in with your Google account to see who you're rooming with."
-          >
-            {arrangement}
-          </LoginWall>
-        ) : (
-          arrangement
-        )}
       </div>
     </section>
   )

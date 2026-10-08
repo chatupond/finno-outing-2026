@@ -109,13 +109,13 @@ export default function ResortSection() {
       {/* Right — resort info + activities */}
       <div className="flex items-center px-6 sm:px-12 lg:px-16 xl:px-24 py-20 lg:py-28">
         <div className="w-full max-w-xl">
-          <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
+          <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-primary text-xs font-semibold tracking-widest uppercase">
               Where We Stay · Activities
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl xl:text-6xl font-black text-white tracking-tight leading-none mb-6">
+          <h2 className="text-4xl sm:text-5xl xl:text-6xl font-black text-white tracking-tight leading-none mb-6 text-center lg:text-left">
             Lake Heaven
             <br />
             <span className="text-gradient">Resort</span>

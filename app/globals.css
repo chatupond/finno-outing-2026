@@ -10,6 +10,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* keep anchored sections clear of the fixed navbar */
+  scroll-padding-top: 4rem;
 }
 
 button, a {

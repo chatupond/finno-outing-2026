@@ -171,13 +171,13 @@ export default function CafesSection() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
+            <div className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="text-white text-xs font-semibold tracking-widest uppercase">
                 Cafés Nearby
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-secondary tracking-tight leading-none">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-secondary tracking-tight leading-none text-center lg:text-left">
               After-Lunch
               <br />
               Café Hopping

@@ -6,6 +6,7 @@ import ResortSection from "./_components/ResortSection"
 import ScheduleSection from "./_components/ScheduleSection"
 import LunchSection from "./_components/LunchSection"
 import CafesSection from "./_components/CafesSection"
+import DrinksSection from "./_components/DrinksSection"
 import AttendeesSection from "./_components/AttendeesSection"
 import CarsSection from "./_components/CarsSection"
 import BedroomSection from "./_components/BedroomSection"
@@ -108,6 +109,7 @@ export default function Home() {
         <ResortMapSection />
         <LunchSection />
         <CafesSection />
+        <DrinksSection />
       </main>
       <BackToTopButton />
       <footer className="bg-secondary-dark py-10 border-t border-white/5" style={{ backgroundColor: "#00101e" }}>

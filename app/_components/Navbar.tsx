@@ -17,6 +17,7 @@ const sectionLinks = [
   { id: "resort-map", label: "Map" },
   { id: "lunch", label: "Lunch" },
   { id: "cafes", label: "Cafés" },
+  { id: "drinks", label: "Drinks" },
 ]
 
 export default function Navbar() {

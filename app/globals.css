@@ -261,3 +261,61 @@ button, a {
     animation: none;
   }
 }
+
+/* ── Drinks section (DrinksSection.tsx) ───────────────────── */
+@keyframes drink-bob {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-14px) rotate(8deg); }
+}
+
+@keyframes cheers-left {
+  0%, 60%, 100% { transform: rotate(0deg) translateX(0); }
+  75% { transform: rotate(18deg) translateX(10px); }
+}
+
+@keyframes cheers-right {
+  0%, 60%, 100% { transform: scaleX(-1) rotate(0deg) translateX(0); }
+  75% { transform: scaleX(-1) rotate(18deg) translateX(10px); }
+}
+
+@keyframes qr-wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  25% { transform: rotate(2deg) scale(1.02); }
+  50% { transform: rotate(-1deg); }
+  75% { transform: rotate(1.5deg) scale(1.01); }
+}
+
+.drink-float {
+  position: absolute;
+  animation: drink-bob 4s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cheers-left {
+  display: inline-block;
+  animation: cheers-left 2s ease-in-out infinite;
+}
+
+.cheers-right {
+  display: inline-block;
+  animation: cheers-right 2s ease-in-out infinite;
+}
+
+.qr-card {
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.qr-card:hover {
+  animation: qr-wiggle 0.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drink-float,
+  .cheers-left,
+  .cheers-right,
+  .qr-card:hover {
+    animation: none;
+  }
+}

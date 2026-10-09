@@ -219,7 +219,7 @@ function SignInPrompt() {
       <div>
         <h3 className="text-white text-xl font-bold mb-1">Sign in to Register</h3>
         <p className="text-white/50 text-sm leading-relaxed">
-          Use your Google account to secure your spot at Finnomena Tech Outing 2026.
+          Use your Google account to secure your spot at Finnomena Builder Outing 2026.
         </p>
       </div>
       <button
@@ -333,7 +333,7 @@ export default function RegistrationModal() {
                 <span className="text-secondary text-[10px] font-black">F</span>
               </div>
               <span className="text-white/50 text-xs font-medium tracking-wider uppercase">
-                Finnomena Tech Outing 2026
+                Finnomena Builder Outing 2026
               </span>
             </div>
             <h2 className="text-white text-lg font-bold">

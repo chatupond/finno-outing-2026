@@ -169,7 +169,7 @@ export default async function AttendeesSection() {
             <div>
               <p className="text-secondary font-bold text-xl mb-2">No attendees yet</p>
               <p className="text-dark-text/50 text-sm">
-                Be the first to register for Finnomena Tech Outing 2026!
+                Be the first to register for Finnomena Builder Outing 2026!
               </p>
             </div>
             <HeroJoinButton />

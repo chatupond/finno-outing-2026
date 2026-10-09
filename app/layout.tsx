@@ -17,31 +17,31 @@ const prompt = Prompt({
 })
 
 export const metadata: Metadata = {
-  title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
-  description: "ทริป Outing ของทีม Finnomena tech",
+  title: "Finnomena Builder Outing 2026 - Lake Heaven Resort",
+  description: "ทริป Outing ของทีม Finnomena Builder",
   openGraph: {
-    title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
-    description: "ทริป Outing ของทีม Finnomena tech",
+    title: "Finnomena Builder Outing 2026 - Lake Heaven Resort",
+    description: "ทริป Outing ของทีม Finnomena Builder",
     type: "website",
     locale: "th_TH",
-    siteName: "Finnomena Tech Outing 2026",
+    siteName: "Finnomena Builder Outing 2026",
     images: [
       {
         url: "/images/og-image.png",
         width: 1512,
         height: 756,
-        alt: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
+        alt: "Finnomena Builder Outing 2026 - Lake Heaven Resort",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Finnomena Tech Outing 2026 - Lake Heaven Resort",
-    description: "ทริป Outing ของทีม Finnomena tech",
+    title: "Finnomena Builder Outing 2026 - Lake Heaven Resort",
+    description: "ทริป Outing ของทีม Finnomena Builder",
     images: ["/images/og-image.png"],
   },
   keywords: [
-    "Finnomena Tech",
+    "Finnomena Builder",
     "Team Outing",
     "Kanchanaburi",
     "Lake Heaven Resort",

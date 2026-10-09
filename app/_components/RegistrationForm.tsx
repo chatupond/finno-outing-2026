@@ -52,7 +52,7 @@ export default function RegistrationForm({ name, email, image }: Props) {
         <div>
           <h3 className="text-white text-2xl font-bold mb-2">You&apos;re registered!</h3>
           <p className="text-white/60">
-            Welcome to Finnomena Tech Outing 2026. See you in Kanchanaburi! 🎉
+            Welcome to Finnomena Builder Outing 2026. See you in Kanchanaburi! 🎉
           </p>
         </div>
         <a

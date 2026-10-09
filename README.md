@@ -1,6 +1,6 @@
-# Finnomena Tech Outing 2026
+# Finnomena Builder Outing 2026
 
-Landing page for the Finnomena Tech team outing event — 16–17 October 2026 at Heaven Kwai Resort, Kanchanaburi.
+Landing page for the Finnomena Builder team outing event — 16–17 October 2026 at Heaven Kwai Resort, Kanchanaburi.
 
 ## Tech Stack
 
